@@ -13,7 +13,7 @@ type JSONResponse struct {
 }
 
 // jsonResponse is a helper function that is used to return a JSON response
-func (app *application) jsonResponse(w http.ResponseWriter, r *http.Request, status int, data interface{}, headers ...http.Header) error {
+func (app *application) jsonResponse(w http.ResponseWriter, status int, data interface{}, headers ...http.Header) error {
 	output, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -30,4 +30,15 @@ func (app *application) jsonResponse(w http.ResponseWriter, r *http.Request, sta
 		return err
 	}
 	return nil
+}
+
+func (app *application) errorJSON(w http.ResponseWriter, err error, status ...int) error {
+	statusCode := http.StatusBadRequest
+	if len(status) > 0 {
+		statusCode = status[0]
+	}
+	var payload JSONResponse
+	payload.Error = true
+	payload.Msg = err.Error()
+	return app.jsonResponse(w, statusCode, payload)
 }

@@ -3,31 +3,35 @@ package models
 import "time"
 
 type User struct {
-	ID        int
-	FirstName string
-	LastName  string
-	Email     string
+	ID        int       `json:"id"`
+	FirstName string    `json:"first_name"`
+	LastName  string    `json:"last_name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	Role      string    `json:"role"`
+	CreatedAt time.Time `json:"-"`
+	UpdatedAt time.Time `json:"-"`
 }
 
 type Therapist struct {
-	ID            int
-	TherapistName string
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
+	ID            int       `json:"id"`
+	TherapistName string    `json:"therapist_name"`
+	CreatedAt     time.Time `json:"-"`
+	UpdatedAt     time.Time `json:"-"`
 }
 
 type Reservation struct {
-	ID          int
-	FirstName   string
-	LastName    string
-	Email       string
-	Phone       string
-	TherapistID int
-	Therapist   Therapist
-	StartDate   time.Time
-	EndDate     time.Time
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	ID          int       `json:"id"`
+	FirstName   string    `json:"first_name"`
+	LastName    string    `json:"last_name"`
+	Email       string    `json:"email"`
+	Phone       string    `json:"phone"`
+	TherapistID int       `json:"therapist_id"`
+	Therapist   Therapist `json:"therapist"`
+	StartDate   time.Time `json:"start_date"`
+	EndDate     time.Time `json:"end_date"`
+	CreatedAt   time.Time `json:"-"`
+	UpdatedAt   time.Time `json:"-"`
 }
 
 type Restriction struct {
